@@ -70,7 +70,7 @@ export const NAV_LINKS_OPTIONAL = [
 export const FOOTER_TAGLINE =
   'FDA-registered Ghanaian teas and botanical infusions. Brew nature. Feel better.';
 
-export const HERO_IMAGE_VERSION = '20260916';
+export const HERO_IMAGE_VERSION = '20260916c';
 export const HERO_IMAGES = [
   '/hero/lifestyle-hero-1.jpg',
   '/hero/lifestyle-hero-2.jpg',
