@@ -1,0 +1,64 @@
+{
+  "name": "greencup",
+  "version": "1.0.0",
+  "description": "Green Cup storefront — FDA-registered Ghanaian teas and botanical infusions.",
+  "author": "Shapes Pro Ltd <greencup4you@gmail.com>",
+  "license": "UNLICENSED",
+  "homepage": "https://greencup4u.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Drrbarns/greencup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Drrbarns/greencup/issues"
+  },
+  "keywords": [
+    "green-cup",
+    "tea",
+    "ghana",
+    "ecommerce"
+  ],
+  "private": true,
+  "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
+    "jose": "^6.2.12",
+    "jszip": "^3.10.1",
+    "next": "15.1.11",
+    "papaparse": "^5.5.3",
+    "pg": "^8.18.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^3.0.2",
+    "resend": "^6.9.1",
+    "server-only": "^0.0.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.0.0",
+    "postcss": "^8.5.5",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  },
+  "scripts": {
+    "build": "next build",
+    "start": "next start -H 0.0.0.0 -p 3000",
+    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:status": "node scripts/migrate.mjs --status",
+    "create-admin": "node scripts/create-admin-user.mjs",
+    "generate:seo": "node scripts/generate-seo-assets.mjs",
+    "vercel": "vercel",
+    "images:compress": "node scripts/compress-images.mjs"
+  }
+}

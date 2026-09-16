@@ -1,0 +1,37 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+build
+dist
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files — never commit any .env variant.
+# .env.example contained real secrets in early history; keep it out of the
+# repo until/unless someone writes a fully sanitized placeholder version.
+.env
+.env.*
+!.env.types
+.env.example
+
+# Vercel
+.vercel
+.vercel-cli-config
+.cursor/

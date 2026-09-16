@@ -1,0 +1,367 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { apiData, apiPost, apiPatch, apiDelete } from '@/lib/client/api';
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
+  // Module Filtering State — null means “not loaded yet” (show all optional modules)
+  const [enabledModules, setEnabledModules] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    async function checkAuth() {
+      if (pathname === '/admin/login') {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const me = await apiData<{ user: { id: string; email: string; role: string; full_name?: string } | null }>(
+          '/api/auth/me'
+        );
+        const profile = me.user;
+
+        if (!profile) {
+          router.push('/admin/login');
+          return;
+        }
+
+        if (profile.role !== 'admin' && profile.role !== 'staff') {
+          await apiPost('/api/auth/logout').catch(() => {});
+          router.push('/admin/login?error=unauthorized');
+          return;
+        }
+
+        setUser(profile);
+        setUserRole(profile.role);
+        setIsAuthenticated(true);
+      } catch {
+        router.push('/admin/login');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    checkAuth();
+  }, [pathname, router]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (showUserMenu && !target.closest('.user-menu-container')) {
+        setShowUserMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showUserMenu]);
+
+  // Fetch Modules Effect
+  useEffect(() => {
+    async function fetchModules() {
+      try {
+        const data = await apiData<{ modules?: { id: string; enabled: boolean }[] }>(
+          '/api/settings?include=modules'
+        );
+        if (Array.isArray(data.modules)) {
+          setEnabledModules(data.modules.filter((m) => m.enabled).map((m) => m.id));
+        } else {
+          setEnabledModules(null);
+        }
+      } catch (err) {
+        console.warn('Fetch modules failed:', err);
+        setEnabledModules(null);
+      }
+    }
+    fetchModules();
+  }, []);
+
+  // Screen size check for initial state
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        // Only set to false if it's currently true? 
+        // Actually, let's just default to open on desktop, closed on mobile on mount only
+      }
+    };
+
+    // Set initial state based on width
+    if (window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
+    }
+
+    // Optional: Auto-close on resize to mobile? For now, leave as is.
+  }, []);
+
+  const handleLogout = async () => {
+    await apiData('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    router.push('/admin/login');
+  };
+
+  // Special layout for Login Page (before auth gate)
+  if (pathname === '/admin/login') {
+    return <>{children}</>;
+  }
+
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-500">Loading Admin...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-500">Redirecting…</div>;
+  }
+
+  const menuItems = [
+    {
+      title: 'Dashboard',
+      icon: 'ri-dashboard-line',
+      path: '/admin',
+      exact: true
+    },
+    {
+      title: 'Orders',
+      icon: 'ri-shopping-bag-line',
+      path: '/admin/orders',
+      badge: ''
+    },
+    {
+      title: 'Payments',
+      icon: 'ri-refund-2-line',
+      path: '/admin/payments/reconcile',
+    },
+    {
+      title: 'POS',
+      icon: 'ri-store-3-line',
+      path: '/admin/pos'
+    },
+    {
+      title: 'Products',
+      icon: 'ri-box-3-line',
+      path: '/admin/products'
+    },
+    {
+      title: 'Sale Pricing',
+      icon: 'ri-price-tag-2-line',
+      path: '/admin/sales'
+    },
+    {
+      title: 'Categories',
+      icon: 'ri-folder-line',
+      path: '/admin/categories'
+    },
+    {
+      title: 'Customers',
+      icon: 'ri-group-line',
+      path: '/admin/customers'
+    },
+    {
+      title: 'Reviews',
+      icon: 'ri-chat-smile-2-line',
+      path: '/admin/reviews'
+    },
+    {
+      title: 'Inventory',
+      icon: 'ri-stack-line',
+      path: '/admin/inventory'
+    },
+    {
+      title: 'Analytics',
+      icon: 'ri-bar-chart-line',
+      path: '/admin/analytics'
+    },
+    {
+      title: 'Coupons',
+      icon: 'ri-coupon-2-line',
+      path: '/admin/coupons'
+    },
+    {
+      title: 'Customer Insights',
+      icon: 'ri-user-search-line',
+      path: '/admin/customer-insights',
+      moduleId: 'customer-insights'
+    },
+    {
+      title: 'Notifications',
+      icon: 'ri-notification-3-line',
+      path: '/admin/notifications',
+      moduleId: 'notifications'
+    },
+    {
+      title: 'SMS Debugger',
+      icon: 'ri-message-2-line',
+      path: '/admin/test-sms'
+    },
+
+    {
+      title: 'Blog',
+      icon: 'ri-article-line',
+      path: '/admin/blog',
+      moduleId: 'blog'
+    },
+    {
+      title: 'Modules',
+      icon: 'ri-puzzle-line',
+      path: '/admin/modules'
+    },
+  ];
+
+  const visibleMenuItems = menuItems.filter((item) => {
+    const moduleId = (item as { moduleId?: string }).moduleId;
+    if (!moduleId) return true;
+    if (enabledModules === null) return true;
+    return enabledModules.includes(moduleId);
+  });
+
+  return (
+    <div className="admin-shell min-h-screen bg-gray-50 font-sans tracking-normal">
+
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden glass-overlay"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Mobile: Transform / Desktop: Width transition */}
+      <aside
+        className={`fixed top-0 left-0 z-40 h-screen bg-white border-r border-gray-200 transition-all duration-300
+          w-64
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+          ${isSidebarOpen ? 'lg:w-64' : 'lg:w-0 lg:overflow-hidden'}
+          lg:translate-x-0
+        `}
+      >
+        <div className="h-full px-4 py-6 overflow-y-auto">
+          <Link href="/admin" className="flex items-center mb-8 px-2 cursor-pointer">
+            <span className="text-xl font-display font-semibold text-brand-espresso">{process.env.NEXT_PUBLIC_SITE_NAME || 'Green Cup'}</span>
+            <span className="ml-3 text-sm font-semibold text-gray-500">ADMIN</span>
+          </Link>
+
+          <nav className="space-y-1">
+            {visibleMenuItems.map((item) => {
+              const isActive = item.exact ? pathname === item.path : pathname.startsWith(item.path);
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)} // Close on mobile click
+                  className={`flex items-center justify-between px-4 py-3 rounded-lg transition-colors cursor-pointer ${isActive
+                    ? 'bg-store-surface text-store-ink font-semibold'
+                    : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <i className={`${item.icon} text-xl shrink-0 w-5 h-5 flex items-center justify-center`}></i>
+                    <span className="truncate">{item.title}</span>
+                  </div>
+                  {item.badge && (
+                    <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full">
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mt-8 pt-8 border-t border-gray-200">
+            <Link
+              href="/"
+              target="_blank"
+              onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
+              className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer"
+            >
+              <i className="ri-external-link-line text-xl w-5 h-5 flex items-center justify-center"></i>
+              <span>View Store</span>
+            </Link>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <div className={`transition-all duration-300 ml-0 ${isSidebarOpen ? 'lg:ml-64' : 'lg:ml-0'}`}>
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+          <div className="px-4 py-4 lg:px-6 flex items-center justify-between">
+            <div className="flex items-center gap-2 min-w-0">
+              <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="w-10 h-10 shrink-0 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+                aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+              >
+                <i className={`${isSidebarOpen ? 'ri-menu-fold-line' : 'ri-menu-unfold-line'} text-xl`}></i>
+              </button>
+              <Link
+                href="/admin/sales"
+                className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-sm font-semibold border transition-colors shrink-0 ${
+                  pathname === '/admin/sales'
+                    ? 'bg-store-navy text-white border-store-navy'
+                    : 'bg-white text-store-ink border-gray-200 hover:bg-store-surface'
+                }`}
+                title="Turn store-wide sale pricing on or off"
+              >
+                <i className="ri-price-tag-2-line text-lg" aria-hidden />
+                <span className="sm:hidden">Sale</span>
+                <span className="hidden sm:inline">Store-wide sale</span>
+              </Link>
+            </div>
+
+            <div className="flex items-center space-x-2 lg:space-x-4">
+              <button className="relative w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
+                <i className="ri-notification-3-line text-xl"></i>
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+              </button>
+
+              <div className="relative user-menu-container">
+                <button
+                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  className="flex items-center space-x-2 lg:space-x-3 px-2 lg:px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+                >
+                  <div className="w-8 h-8 lg:w-9 lg:h-9 flex items-center justify-center bg-store-surface text-store-ink rounded-full font-semibold">
+                    {user?.email?.charAt(0).toUpperCase() || 'A'}
+                  </div>
+                  <div className="text-left hidden md:block">
+                    <p className="text-sm font-semibold text-gray-900 capitalize">{userRole || 'Admin'}</p>
+                    <p className="text-xs text-gray-500 max-w-[100px] truncate">{user?.email}</p>
+                  </div>
+                  <i className="ri-arrow-down-s-line text-gray-600"></i>
+                </button>
+
+                {showUserMenu && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-20">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors border-t border-gray-200 text-left cursor-pointer"
+                    >
+                      <i className="ri-logout-box-line text-red-600 w-5 h-5 flex items-center justify-center"></i>
+                      <span className="text-red-600">Logout</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main className="p-4 lg:p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}

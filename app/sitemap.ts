@@ -1,0 +1,131 @@
+import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/seo';
+import { query } from '@/lib/db';
+
+/**
+ * Dynamic sitemap.xml for Green Cup.
+ *
+ * Includes:
+ * 1. Public static pages (home, shop, categories, about, contact, faqs,
+ *    shipping, returns, privacy, terms, help, blog).
+ * 2. Every active product (with image and lastmod) — feeds Google's
+ *    image sitemap too.
+ * 3. Every active category as a /shop?category=[slug] entry (we don't have
+ *    per-category routes today; this is the canonical browse URL).
+ * 4. The currently-published blog posts.
+ *
+ * Excludes everything in app/robots.ts disallow list (cart, account, auth,
+ * checkout, pay, order-tracking, admin, api).
+ *
+ * Output is at `${SITE_URL}/sitemap.xml` automatically by Next.js.
+ */
+
+// Make sure the sitemap is regenerated frequently — it's queried by crawlers
+// and we want product/category changes to propagate quickly. Next.js will
+// revalidate the static sitemap response at this interval.
+export const revalidate = 3600; // 1 hour
+
+type Frequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+
+interface StaticEntry {
+    path: string;
+    changeFrequency: Frequency;
+    priority: number;
+}
+
+const STATIC_PAGES: StaticEntry[] = [
+    { path: '/', changeFrequency: 'daily', priority: 1.0 },
+    { path: '/shop', changeFrequency: 'daily', priority: 0.9 },
+    { path: '/categories', changeFrequency: 'weekly', priority: 0.85 },
+    { path: '/about', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/contact', changeFrequency: 'monthly', priority: 0.6 },
+    { path: '/blog', changeFrequency: 'weekly', priority: 0.6 },
+    { path: '/faqs', changeFrequency: 'monthly', priority: 0.5 },
+    { path: '/help', changeFrequency: 'monthly', priority: 0.45 },
+    { path: '/shipping', changeFrequency: 'monthly', priority: 0.4 },
+    { path: '/returns', changeFrequency: 'monthly', priority: 0.4 },
+    { path: '/privacy', changeFrequency: 'yearly', priority: 0.3 },
+    { path: '/terms', changeFrequency: 'yearly', priority: 0.3 },
+];
+
+// Blog posts are currently hardcoded in app/(store)/blog/[id]/page.tsx
+// (IDs 1–3). When the blog moves into a CMS table, swap this for a real
+// fetch — until then we hand-list the published IDs.
+const STATIC_BLOG_POSTS: Array<{ id: string; lastModified: string }> = [
+    { id: '1', lastModified: '2025-12-15' },
+    { id: '2', lastModified: '2025-12-12' },
+    { id: '3', lastModified: '2025-12-10' },
+];
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const now = new Date();
+    const baseUrl = SITE_URL.replace(/\/$/, '');
+
+    const staticPages: MetadataRoute.Sitemap = STATIC_PAGES.map((p) => ({
+        url: `${baseUrl}${p.path}`,
+        lastModified: now,
+        changeFrequency: p.changeFrequency,
+        priority: p.priority,
+    }));
+
+    const staticBlog: MetadataRoute.Sitemap = STATIC_BLOG_POSTS.map((post) => ({
+        url: `${baseUrl}/blog/${post.id}`,
+        lastModified: new Date(post.lastModified),
+        changeFrequency: 'monthly',
+        priority: 0.55,
+    }));
+
+    let productPages: MetadataRoute.Sitemap = [];
+    let categoryPages: MetadataRoute.Sitemap = [];
+
+    try {
+        const products = await query<{
+            slug: string;
+            updated_at: string;
+            product_images: { url: string; position: number }[];
+        }>(
+            `SELECT p.slug, p.updated_at,
+                    COALESCE(
+                      (SELECT jsonb_agg(jsonb_build_object('url', i.url, 'position', i.position) ORDER BY i.position)
+                       FROM product_images i WHERE i.product_id = p.id),
+                      '[]'::jsonb
+                    ) AS product_images
+               FROM products p
+              WHERE p.status = 'active'`
+        );
+
+        productPages = products.map((product) => {
+            const sortedImages = [...(product.product_images || [])].sort(
+                (a, b) => (a.position ?? 0) - (b.position ?? 0)
+            );
+            const primaryImage = sortedImages[0]?.url
+                ? sortedImages[0].url.startsWith('http')
+                    ? sortedImages[0].url
+                    : `${baseUrl}${sortedImages[0].url}`
+                : undefined;
+
+            return {
+                url: `${baseUrl}/product/${product.slug}`,
+                lastModified: product.updated_at ? new Date(product.updated_at) : now,
+                changeFrequency: 'weekly' as const,
+                priority: 0.75,
+                images: primaryImage ? [primaryImage] : undefined,
+            };
+        });
+
+        const categories = await query<{ slug: string; updated_at: string }>(
+            `SELECT slug, updated_at FROM categories WHERE status = 'active'`
+        );
+
+        categoryPages = categories.map((category) => ({
+            url: `${baseUrl}/shop?category=${category.slug}`,
+            lastModified: category.updated_at ? new Date(category.updated_at) : now,
+            changeFrequency: 'weekly' as const,
+            priority: 0.7,
+        }));
+    } catch (error) {
+        console.error('[sitemap] error fetching dynamic entries:', error);
+    }
+
+    return [...staticPages, ...categoryPages, ...productPages, ...staticBlog];
+}
