@@ -62,7 +62,7 @@ export default function AnnouncementBar() {
         return (
             <div className="bg-brand-mauve/80 backdrop-blur-md text-white py-2.5 text-center border-b border-white/20 shadow-sm relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer pointer-events-none" />
-                <p className="relative z-10 text-xs sm:text-sm font-medium tracking-normal">Trending lifestyle &amp; import plug: fashion, appliances &amp; more. <Link href="/shop?sort=newest" className="underline underline-offset-4 text-brand-cream hover:text-brand-nude ml-1 font-semibold transition-colors">Shop New</Link></p>
+                <p className="relative z-10 text-xs sm:text-sm font-medium tracking-normal">Brew Nature. Feel Better. FDA-registered Ghanaian teas. <Link href="/shop" className="underline underline-offset-4 text-brand-cream hover:text-brand-nude ml-1 font-semibold transition-colors">Shop blends</Link></p>
             </div>
         );
     }

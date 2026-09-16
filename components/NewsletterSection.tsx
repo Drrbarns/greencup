@@ -38,8 +38,8 @@ export default function NewsletterSection() {
               Join Our <span className="italic text-brand-mauve">Community</span>
             </h3>
             <p className="brand-body text-left lg:text-left max-w-lg">
-              Get first access to trending lifestyle drops, import-ready arrivals, home appliances, fashion, and
-              exclusive updates, straight to your inbox.
+              Be first to hear about new FDA-registered blends, small-batch infusions, and Green Cup rituals —
+              straight to your inbox.
             </p>
           </div>
 

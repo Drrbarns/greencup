@@ -12,6 +12,7 @@ import {
   INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
   WHATSAPP_LINK,
+  META_DESCRIPTION,
 } from '@/lib/brand';
 
 const CANONICAL_SITE_URL = 'https://greencup4u.com';
@@ -68,29 +69,24 @@ export const SEO_ASSETS = {
   icon512: '/favicon/android-chrome-512x512.png',
 } as const;
 
-export const DEFAULT_TITLE =
-  'Green Cup | Trending Lifestyle & Import Plug in Ghana';
+export const DEFAULT_TITLE = 'Green Cup | FDA-Registered Ghanaian Teas';
 
-export const DEFAULT_DESCRIPTION =
-  'Green Cup: your trending lifestyle destination and import plug in Ghana. Shop fashion, home appliances, bags, accessories, and curated imports online.';
+export const DEFAULT_DESCRIPTION = META_DESCRIPTION;
 
 export const DEFAULT_KEYWORDS = [
   BRAND_NAME,
   'Green Cup Ghana',
-  'fashion shop Accra',
-  'imported fashion Ghana',
-  'designer bags Ghana',
-  'lifestyle imports Accra',
-  'trending lifestyle Ghana',
-  'import plug Ghana',
-  'home appliances online Ghana',
-  'trending fashion online',
-  'accessories online Ghana',
-  'social commerce fashion',
-  'buy fashion online Ghana',
-  'imported lifestyle products',
-  'vintage inspired fashion',
-  'Green Cup tea Accra',
+  'Ghanaian tea',
+  'FDA registered tea Ghana',
+  'soursop tea Accra',
+  'lemon ginger infusion',
+  'guava green tea',
+  'papaya cinnamon tea',
+  'beetroot ginger tea',
+  'botanical infusions Ghana',
+  'Shapes Pro Ltd',
+  'buy tea online Ghana',
+  'caffeine-free tea Ghana',
 ];
 
 export type PageSeoKey =
@@ -120,31 +116,31 @@ const PAGE_SEO: Record<
     path: '/',
   },
   shop: {
-    title: 'Shop Trending Lifestyle & Imports',
+    title: 'Shop Ghanaian Teas & Infusions',
     description:
-      'Browse fashion, home appliances, bags, accessories, beauty, and import-ready lifestyle products. New arrivals and featured picks updated regularly.',
-    keywords: ['shop fashion Ghana', 'home appliances Ghana', 'import plug Accra', 'lifestyle shop Accra'],
+      'Browse FDA-registered Green Cup teas: soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon slices. Made in Ghana.',
+    keywords: ['shop Green Cup tea', 'Ghanaian tea online', 'soursop brew Accra'],
     path: '/shop',
   },
   categories: {
     title: 'Shop by Category',
     description:
-      'Explore Green Cup categories: fashion, home appliances, bags, accessories, lifestyle finds, imports, and more. Curated for every shopper.',
-    keywords: ['fashion categories', 'home appliances category', 'shop by category Ghana'],
+      'Explore Green Cup categories: wellness blends, caffeine-free infusions, citrus and ginger, leaf teas, roots and spice, and evening rituals.',
+    keywords: ['tea categories Ghana', 'wellness tea Accra', 'caffeine-free tea Ghana'],
     path: '/categories',
   },
   about: {
     title: 'About Us | Our Story & Mission',
     description:
-      'Green Cup is your trending lifestyle destination and import plug in Accra: fashion, appliances, and curated arrivals for all.',
-    keywords: ['about Green Cup', 'trending lifestyle brand Ghana', 'import plug Ghana'],
+      'Green Cup is a Ghanaian tea house from Shapes Pro Ltd. FDA-registered botanical infusions made in Ghana for everyday calm and vitality.',
+    keywords: ['about Green Cup', 'Shapes Pro Ltd tea', 'Ghanaian tea brand'],
     path: '/about',
   },
   contact: {
     title: 'Contact Us | Orders, WhatsApp & Visit',
     description:
-      'Reach Green Cup by phone, WhatsApp, or in person at GCB Bank, White House, Spintex Road, Accra. Questions about orders, reservations, and imports welcome.',
-    keywords: ['contact Green Cup', 'fashion store Accra contact'],
+      'Reach Green Cup by phone, WhatsApp, or confirmed pickup at GCB Bank, White House, Spintex Road, Accra. Questions about teas and orders welcome.',
+    keywords: ['contact Green Cup', 'Green Cup WhatsApp Accra'],
     path: '/contact',
   },
   cart: {

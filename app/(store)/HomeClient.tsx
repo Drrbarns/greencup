@@ -339,7 +339,7 @@ export default function HomeClient() {
             </h2>
             <div className="w-16 h-px bg-brand-champagne mx-auto mb-6" />
             <p className="brand-body max-w-xl mx-auto text-center">
-              Trending lifestyle picks and import-ready favorites: fashion, appliances, accessories, and more.
+              FDA-registered Ghanaian teas and botanical infusions — soursop, lemon-ginger, guava, papaya-cinnamon, and beetroot.
             </p>
           </AnimatedSection>
 

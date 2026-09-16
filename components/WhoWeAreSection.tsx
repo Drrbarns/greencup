@@ -34,11 +34,10 @@ export default function WhoWeAreSection() {
             </h2>
             <div className="space-y-5 brand-body">
               <p>
-                <strong className="font-semibold text-brand-espresso">{APP_TITLE}</strong> is your{' '}
-                <strong className="font-semibold text-brand-espresso">trending lifestyle destination</strong> and{' '}
-                <strong className="font-semibold text-brand-espresso">import plug</strong>. Two roles, one stop: what is
-                hot right now, and the sourced arrivals you will not find everywhere. We welcome every shopper who wants
-                style, quality, and curated picks without labels.
+                <strong className="font-semibold text-brand-espresso">{APP_TITLE}</strong> is a Ghanaian tea house from{' '}
+                <strong className="font-semibold text-brand-espresso">Shapes Pro Ltd</strong>. Every blend is{' '}
+                <strong className="font-semibold text-brand-espresso">FDA-registered</strong>, made in Ghana, and brewed
+                for everyday calm, vitality, and ritual — not a walk-in shop, a cup you can trust.
               </p>
               <p>{BRAND_INTRO_SECONDARY}</p>
               <div className="pt-2">
@@ -66,7 +65,7 @@ export default function WhoWeAreSection() {
                 >
                   <img
                     src={src}
-                    alt={`${APP_TITLE} lifestyle ${index + 1}`}
+                    alt={`${APP_TITLE} tea ${index + 1}`}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     decoding={index === 0 ? 'sync' : 'async'}
                     fetchPriority={index === 0 ? 'high' : 'auto'}
@@ -94,8 +93,8 @@ export default function WhoWeAreSection() {
             </div>
 
             <div className="absolute -bottom-5 -left-5 glass p-5 rounded-2xl shadow-luxury max-w-xs hidden md:block">
-              <p className="font-display text-lg font-semibold text-brand-espresso">Trending daily</p>
-              <p className="text-sm text-brand-cocoa/80 font-medium mt-1">Lifestyle · Imports · Appliances</p>
+              <p className="font-display text-lg font-semibold text-brand-espresso">Brew Nature. Feel Better.</p>
+              <p className="text-sm text-brand-cocoa/80 font-medium mt-1">FDA teas · Made in Ghana</p>
             </div>
           </AnimatedSection>
         </div>

@@ -25,23 +25,23 @@ export default function AboutPage() {
 
   const values = [
     {
-      title: 'Trending Lifestyle',
+      title: 'FDA-Registered',
       description:
-        'We track what is hot: fashion, bags, accessories, beauty, and everyday picks, so your cart always feels current.',
+        'Every Green Cup blend is registered and made in Ghana by Shapes Pro Ltd — teas you can drink with confidence.',
     },
     {
-      title: 'Import Plug',
+      title: 'Brew Nature',
       description:
-        'Sourced arrivals and special imports you will not find on every corner. Fresh drops, bold energy, real curation.',
+        'Soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon: small-batch infusions with nothing added that does not belong.',
     },
     {
-      title: 'Home & Living',
+      title: 'Daily Ritual',
       description:
-        'Home appliances and lifestyle essentials alongside style: one destination for how you dress and how you live.',
+        'Caffeine-free cups for morning brightness, after-meal comfort, and evening wind-down. Hot or iced.',
     },
     {
       title: 'Delivered With Care',
-      description: `Based in ${CONTACT_ADDRESS}, we serve shoppers across Ghana with friendly, reliable service, with no gatekeeping.`,
+      description: `Confirm a pickup at ${CONTACT_ADDRESS}, or have your order sent across Ghana. This is fulfillment, not a walk-in shop.`,
     },
   ];
 
@@ -81,8 +81,8 @@ export default function AboutPage() {
                 <img src={LOGO_PATH} alt={siteName} className="w-full h-full object-contain p-8" />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-luxury max-w-xs border border-brand-nude">
-                <p className="font-display text-brand-espresso">Trending style</p>
-                <p className="text-sm text-brand-cocoa/80 font-medium mt-1">Lifestyle · Imports · Appliances</p>
+                <p className="font-display text-brand-espresso">Brew Nature. Feel Better.</p>
+                <p className="text-sm text-brand-cocoa/80 font-medium mt-1">FDA teas · Made in Ghana</p>
               </div>
             </div>
           </div>
@@ -118,19 +118,19 @@ export default function AboutPage() {
               <div className="space-y-6 brand-body">
                 <p>
                   <strong className="font-semibold text-brand-espresso">{siteName}</strong> began with a simple idea:
-                  make trending lifestyle and import-ready products feel accessible, exciting, and personal, like
-                  shopping your favorite creator&apos;s picks, open to everyone.
+                  Ghanaian botanical infusions should feel everyday — FDA-registered, small-batch, and honest about
+                  what is in the cup.
                 </p>
                 <p>
-                  From fashion and bags to home appliances, accessories, and special imports, we build collections
-                  around what is trending and what our community asks for next.
+                  From soursop leaf and lemon-ginger to guava, papaya-cinnamon, beetroot, and dried lemon slices, we
+                  brew blends you can drink hot or iced, morning or night.
                 </p>
                 <p>
                   Reach us on <strong>{CONTACT_PHONE_DISPLAY}</strong> or{' '}
                   <a href={WHATSAPP_LINK} className="text-brand-mauve hover:underline font-medium">
                     WhatsApp
                   </a>
-                  . We&apos;re here for orders, styling questions, and updates on new drops.
+                  . We&apos;re here for orders, blend questions, and confirmed Spintex pickup.
                 </p>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-espresso/85 to-transparent p-8">
                   <p className="text-brand-cream font-display text-xl">{siteName}</p>
                   <p className="text-brand-nude/90 text-sm font-medium tracking-wide">
-                    Trending lifestyle · Import plug · Home appliances
+                    FDA teas · Made in Ghana · Brew Nature. Feel Better.
                   </p>
                 </div>
               </div>
@@ -152,17 +152,17 @@ export default function AboutPage() {
         {activeTab === 'mission' && (
           <div className="grid md:grid-cols-2 gap-12 animate-fade-in-up">
             <div className="bg-white p-10 rounded-3xl border border-brand-nude shadow-sm">
-              <h3 className="text-3xl font-display text-brand-espresso mb-4">Curated For You</h3>
+              <h3 className="text-3xl font-display text-brand-espresso mb-4">Brewed For You</h3>
               <p className="brand-body">
-                We bring together trending lifestyle picks, import-ready arrivals, home appliances, fashion, and
-                accessories in one bold shopping experience. Always fresh, always curated.
+                We craft FDA-registered Ghanaian teas and botanical infusions for everyday calm, vitality, and
+                ritual. Always natural, always made in Ghana.
               </p>
             </div>
             <div className="bg-brand-nude/30 p-10 rounded-3xl border border-brand-nude">
               <h3 className="text-3xl font-display text-brand-espresso mb-4">Community First</h3>
               <p className="brand-body">
-                We grow with our community, sharing drops, exclusive updates, and lifestyle favorites that feel
-                social, modern, and genuinely exciting for every shopper.
+                We grow with our community — sharing new blends, brewing notes, and exclusive updates that feel
+                calm, modern, and genuinely useful for every cup.
               </p>
             </div>
           </div>
@@ -174,8 +174,8 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display text-brand-espresso mb-4">Why Shop With Us?</h2>
             <p className="brand-body-lg max-w-2xl mx-auto text-center">
-              Two jobs, one brand: trending lifestyle curation and your import plug, plus home appliances when you
-              need them.
+              One job, done well: FDA-registered Ghanaian teas you can shop online, pick up at Spintex, or send
+              across Ghana.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -196,8 +196,8 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-brand-cream">
           <h2 className="text-4xl md:text-5xl font-display mb-8">Ready to explore?</h2>
           <p className="brand-body-lg text-brand-nude/95 mb-10 max-w-2xl mx-auto text-center">
-            Discover trending lifestyle, import-ready picks, home appliances, fashion, and accessories, curated for
-            you.
+            Discover soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon — curated for how you
+            actually drink tea.
           </p>
           <Link href="/shop" className="btn-luxury-primary text-base px-10 py-4 inline-flex items-center">
             Shop Collection
