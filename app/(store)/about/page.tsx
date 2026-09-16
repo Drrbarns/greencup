@@ -12,8 +12,9 @@ import {
   CONTACT_ADDRESS,
   CONTACT_PHONE_DISPLAY,
   WHATSAPP_LINK,
-  LOGO_PATH,
   TAGLINE,
+  HERO_IMAGES,
+  HERO_IMAGE_VERSION,
 } from '@/lib/brand';
 
 export default function AboutPage() {
@@ -53,7 +54,7 @@ export default function AboutPage() {
       <PageHero
         title="More Than A Brand"
         subtitle={TAGLINE}
-        backgroundImage="/hero/lifestyle-hero-2.png"
+        backgroundImage={HERO_IMAGES[0]}
       />
 
       <section className="py-20 bg-brand-cream overflow-hidden">
@@ -77,8 +78,12 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-soft relative bg-brand-nude/40 border border-brand-nude">
-                <img src={LOGO_PATH} alt={siteName} className="w-full h-full object-contain p-8" />
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-soft relative bg-brand-espresso border border-brand-nude">
+                <img
+                  src={`${HERO_IMAGES[1]}?v=${HERO_IMAGE_VERSION}`}
+                  alt={`${siteName} tea ritual`}
+                  className="w-full h-full object-cover object-[72%_center]"
+                />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-luxury max-w-xs border border-brand-nude">
                 <p className="font-display text-brand-espresso">Brew Nature. Feel Better.</p>
@@ -135,8 +140,12 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="relative">
-              <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-luxury-lg bg-brand-nude/30 relative flex items-center justify-center border border-brand-nude">
-                <img src={LOGO_PATH} alt={siteName} className="w-2/3 h-auto object-contain" />
+              <div className="aspect-[3/4] rounded-3xl overflow-hidden shadow-luxury-lg bg-brand-espresso relative border border-brand-nude">
+                <img
+                  src={`${HERO_IMAGES[2]}?v=${HERO_IMAGE_VERSION}`}
+                  alt={`${siteName} botanicals`}
+                  className="absolute inset-0 w-full h-full object-cover object-center"
+                />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-espresso/85 to-transparent p-8">
                   <p className="text-brand-cream font-display text-xl">{siteName}</p>
                   <p className="text-brand-nude/90 text-sm font-medium tracking-wide">
@@ -192,8 +201,15 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-brand-espresso py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-brand-cream">
+      <div className="relative overflow-hidden py-28 md:py-32">
+        <img
+          src={`${HERO_IMAGES[0]}?v=${HERO_IMAGE_VERSION}`}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-brand-espresso/80" aria-hidden />
+        <div className="absolute inset-0 bg-black/25" aria-hidden />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-brand-cream">
           <h2 className="text-4xl md:text-5xl font-display mb-8">Ready to explore?</h2>
           <p className="brand-body-lg text-brand-nude/95 mb-10 max-w-2xl mx-auto text-center">
             Discover soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon — curated for how you
