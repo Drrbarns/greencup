@@ -95,7 +95,7 @@ export default function HomeClient() {
   useEffect(() => {
     async function fetchHomeData() {
       const [productsResult, categoriesResult] = await Promise.all([
-        apiGet<unknown[]>('/api/storefront/products?featured=true&limit=8'),
+        apiGet<unknown[]>('/api/storefront/products?featured=true&limit=6'),
         fetch('/api/storefront/categories').then((r) => (r.ok ? r.json() : [])),
       ]);
 
@@ -339,18 +339,18 @@ export default function HomeClient() {
             </h2>
             <div className="w-16 h-px bg-brand-champagne mx-auto mb-6" />
             <p className="brand-body max-w-xl mx-auto text-center">
-              FDA-registered Ghanaian teas and botanical infusions — soursop, lemon-ginger, guava, papaya-cinnamon, and beetroot.
+              FDA-registered Ghanaian teas and botanical infusions — soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon.
             </p>
           </AnimatedSection>
 
           {productsLoading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-              {[...Array(4)].map((_, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {[...Array(6)].map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
             </div>
           ) : featuredProducts.length > 0 ? (
-            <AnimatedGrid className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <AnimatedGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {featuredProducts.map((product) => {
                 const variants = product.product_variants || [];
                 const hasVariants = variants.length > 0;
