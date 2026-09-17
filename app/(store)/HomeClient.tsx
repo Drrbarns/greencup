@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { apiGet } from '@/lib/client/api';
 import ProductCard, { type ColorVariant, getColorHex } from '@/components/ProductCard';
@@ -32,18 +32,47 @@ type StoreCategory = {
 const CATEGORY_CARD_CLASS =
   'flex-shrink-0 w-[72vw] max-w-[300px] sm:w-[280px] md:w-[300px] lg:w-[320px]';
 
+function HeroCta({
+  href,
+  children,
+  variant,
+}: {
+  href: string;
+  children: ReactNode;
+  variant: 'primary' | 'secondary';
+}) {
+  const className =
+    variant === 'primary'
+      ? 'inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 rounded-full text-sm md:text-base font-semibold bg-brand-espresso text-brand-cream shadow-soft hover:bg-brand-cocoa transition-colors'
+      : 'inline-flex items-center justify-center w-full sm:w-auto px-7 py-3.5 rounded-full text-sm md:text-base font-semibold bg-white text-brand-espresso shadow-soft hover:bg-brand-cream transition-colors';
+  const content = <span className="flex items-center gap-2">{children}</span>;
+
+  if (href.startsWith('http')) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {content}
+    </Link>
+  );
+}
+
 const HERO_SLIDES = [
   {
     tag: 'Brew Nature',
-    image: HERO_IMAGES[0],
+    image: HERO_IMAGES[2],
     heading: (
       <>
         Ghanaian Teas <br />
         <span className="italic font-medium text-brand-champagne">&amp; Botanical Infusions</span>
       </>
     ),
-    subtext:
-      'FDA-registered blends from Shapes Pro Ltd. Soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon — made in Ghana.',
+    subtext: 'FDA-registered teas from Shapes Pro Ltd. Soursop, lemon-ginger, guava, and more — made in Ghana.',
     cta: { text: 'Shop the Range', href: '/shop' },
     cta2: { text: 'Chat on WhatsApp', href: 'https://wa.me/233555555787' },
   },
@@ -56,22 +85,20 @@ const HERO_SLIDES = [
         <span className="italic font-light text-brand-nude">Of Well-being</span>
       </>
     ),
-    subtext:
-      'Caffeine-free infusions for morning brightness, after-meal comfort, and evening wind-down. Hot or iced, nothing added that does not belong.',
+    subtext: 'Caffeine-free cups for morning, after meals, and evening. Hot or iced.',
     cta: { text: 'Browse Blends', href: '/shop' },
     cta2: { text: 'Our Story', href: '/about' },
   },
   {
     tag: 'Made in Ghana',
-    image: HERO_IMAGES[2],
+    image: HERO_IMAGES[0],
     heading: (
       <>
         Small-Batch Rituals <br />
         <span className="italic font-medium text-brand-champagne">For Every Cup</span>
       </>
     ),
-    subtext:
-      'Order online for rider or bus-station delivery across Ghana, or confirm a Spintex pickup. We brew nature so you can feel better.',
+    subtext: 'Rider or bus-station delivery across Ghana, or pickup in Spintex.',
     cta: { text: 'Shop New Arrivals', href: '/shop?sort=newest' },
     cta2: { text: 'Browse Categories', href: '/categories' },
   },
@@ -124,7 +151,7 @@ export default function HomeClient() {
     <main className="flex-col min-h-screen">
       {/* Hero: sharp 16:9 lifestyle imagery, left-aligned copy */}
       <section className="relative w-full overflow-hidden bg-brand-cream">
-        <div className="relative w-full aspect-video min-h-[546px] max-md:max-h-none md:min-h-[420px] md:max-h-[92vh]">
+        <div className="relative w-full min-h-[78svh] sm:min-h-[640px] md:min-h-[700px] lg:min-h-[780px] max-h-[920px]">
         <div className="absolute top-0 left-0 right-0 z-30 h-0.5 bg-brand-nude/50 hidden md:block">
           <div
             key={currentSlide}
@@ -185,31 +212,23 @@ export default function HomeClient() {
                       index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                     }`}
                   >
-                    <p className="text-base sm:text-lg md:text-xl text-white/95 max-w-md md:max-w-lg mb-8 sm:mb-10 font-medium leading-relaxed drop-shadow-md">
+                    <p className="text-sm sm:text-[0.95rem] md:text-base text-white/90 max-w-sm md:max-w-md mb-6 sm:mb-7 font-medium leading-snug drop-shadow-md">
                       {slide.subtext}
                     </p>
                   </div>
 
                   <div
-                    className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 transition-all duration-700 delay-400 w-full sm:w-auto ${
+                    className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 transition-all duration-700 delay-400 w-full sm:w-auto ${
                       index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                     }`}
                   >
-                    <Link
-                      href={slide.cta.href}
-                      className="btn-luxury-primary text-sm md:text-base shadow-soft justify-center group"
-                    >
-                      <span className="flex items-center gap-2">
-                        {slide.cta.text}
-                        <i className="ri-arrow-right-line transition-transform group-hover:translate-x-0.5" />
-                      </span>
-                    </Link>
-                    <Link
-                      href={slide.cta2.href}
-                      className="hidden sm:inline-flex btn-luxury-outline text-sm md:text-base justify-center border-white/40 text-white hover:bg-white hover:text-brand-espresso"
-                    >
+                    <HeroCta href={slide.cta.href} variant="primary">
+                      {slide.cta.text}
+                      <i className="ri-arrow-right-line" />
+                    </HeroCta>
+                    <HeroCta href={slide.cta2.href} variant="secondary">
                       {slide.cta2.text}
-                    </Link>
+                    </HeroCta>
                   </div>
                 </div>
               </div>
