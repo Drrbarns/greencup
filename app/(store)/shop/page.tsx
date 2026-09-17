@@ -10,6 +10,7 @@ import { cachedQuery } from '@/lib/query-cache';
 import PageHero from '@/components/PageHero';
 
 import { getProductCardPricing } from '@/lib/pricing';
+import { storeImageSrc } from '@/lib/store-image';
 
 function ShopContent() {
   usePageTitle('Shop All Products');
@@ -146,7 +147,7 @@ function ShopContent() {
               name: p.name,
               price: pricing.price,
               originalPrice: pricing.originalPrice,
-              image: p.product_images?.[0]?.url || 'https://via.placeholder.com/800x800?text=No+Image',
+              image: storeImageSrc(p.product_images?.[0]?.url) || 'https://via.placeholder.com/800x800?text=No+Image',
               rating: p.rating_avg || 0,
               reviewCount: 0, // Need to implement reviews relation
               badge: pricing.saleBadge ? 'Sale' : undefined,

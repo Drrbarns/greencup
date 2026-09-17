@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import { storeImageSrc } from '@/lib/store-image';
 
 interface LazyImageProps {
   src: string;
@@ -22,10 +22,10 @@ export default function LazyImage({
   height,
   priority = false,
   onLoad,
-  sizes = '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const resolved = storeImageSrc(src);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -38,8 +38,7 @@ export default function LazyImage({
     onLoad?.();
   };
 
-  // Fallback for invalid/empty URLs
-  if (!src || hasError) {
+  if (!resolved || hasError) {
     return (
       <div className={`relative overflow-hidden bg-gray-200 flex items-center justify-center ${className}`} style={{ width, height }}>
         <span className="text-gray-400 text-xs">No Image</span>
@@ -52,16 +51,16 @@ export default function LazyImage({
       {!isLoaded && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse z-10"></div>
       )}
-      <Image
-        src={src}
+      <img
+        src={resolved}
         alt={alt}
-        fill
-        sizes={sizes}
-        className={`object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         onLoad={handleLoad}
         onError={handleError}
-        priority={priority}
-        quality={75}
       />
     </div>
   );

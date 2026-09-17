@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'greencup4u.com',
+        pathname: '/products/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'greencup4u.com',
+        pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.greencup4u.com',
         pathname: '/uploads/**',
       },
@@ -27,6 +37,21 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.greencup4u.com',
         pathname: '/api/uploads/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.greencup4u.com',
+        pathname: '/products/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ai.greencup4u.com',
+        pathname: '/products/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ai.greencup4u.com',
+        pathname: '/storage/**',
       },
       {
         protocol: 'http',

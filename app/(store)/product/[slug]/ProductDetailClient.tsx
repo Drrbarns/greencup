@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect, useMemo } from 'react';
+import { storeImageSrc } from '@/lib/store-image';
 import { cachedQuery } from '@/lib/query-cache';
 import ProductCard from '@/components/ProductCard';
 import ProductReviews from '@/components/ProductReviews';
@@ -71,7 +71,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
             productData.product_images
               ?.slice()
               .sort((a: { position?: number }, b: { position?: number }) => (a.position ?? 0) - (b.position ?? 0))
-              .map((img: { url: string }) => img.url)
+              .map((img: { url: string }) => storeImageSrc(img.url))
               .filter(Boolean) || [],
           category: productData.categories?.name || 'Shop',
           rating: asNumber(productData.rating_avg),
@@ -136,7 +136,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                 slug: p.slug,
                 name: p.name,
                 price: p.price,
-                image: p.product_images?.[0]?.url || 'https://via.placeholder.com/800?text=No+Image',
+                image: storeImageSrc(p.product_images?.[0]?.url) || 'https://via.placeholder.com/800?text=No+Image',
                 rating: p.rating_avg || 0,
                 reviewCount: 0,
                 inStock: effectiveStock > 0,
@@ -286,14 +286,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
             <div className="grid lg:grid-cols-2 gap-12">
               <div>
                 <div className="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 mb-4 shadow-lg border border-gray-100">
-                  <Image
+                  <img
                     src={product.images[selectedImage]}
                     alt={product.name}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                    quality={80}
+                    className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                   {discount > 0 && (
                     <span className="absolute top-6 right-6 bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-full">
@@ -311,13 +307,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                         className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${selectedImage === index ? 'border-store-navy shadow-md' : 'border-gray-200 hover:border-gray-300'
                           }`}
                       >
-                        <Image
+                        <img
                           src={image}
                           alt={`${product.name} view ${index + 1}`}
-                          fill
-                          className="object-cover object-center"
-                          sizes="(max-width: 1024px) 25vw, 12vw"
-                          quality={60}
+                          className="absolute inset-0 h-full w-full object-cover object-center"
                         />
                       </button>
                     ))}

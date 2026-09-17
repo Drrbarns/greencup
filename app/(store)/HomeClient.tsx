@@ -11,6 +11,7 @@ import NewsletterSection from '@/components/NewsletterSection';
 import WhoWeAreSection from '@/components/WhoWeAreSection';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import { HERO_IMAGES, HERO_IMAGE_VERSION } from '@/lib/brand';
+import { storeImageSrc } from '@/lib/store-image';
 
 const CATEGORY_TINTS = [
   'from-[#2D5A3D]/80 via-[#EEF2E9]/60 to-[#F7F3EB]',
@@ -407,7 +408,7 @@ export default function HomeClient() {
                     name={product.name}
                     price={product.price}
                     originalPrice={product.compare_at_price}
-                    image={primaryImage || ''}
+                    image={storeImageSrc(primaryImage) || ''}
                     rating={product.rating_avg || 5}
                     reviewCount={product.review_count || 0}
                     badge={product.featured ? 'Featured' : undefined}
