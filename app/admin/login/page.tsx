@@ -4,31 +4,26 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { useRecaptcha } from '@/hooks/useRecaptcha';
 import Logo from '@/components/Logo';
 import { BRAND_NAME } from '@/lib/brand';
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const { signIn } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { getToken, verifying } = useRecaptcha();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
-    const isHuman = await getToken('admin_login');
-    if (!isHuman) {
-      setError('Security verification failed. Please try again.');
-      setIsLoading(false);
-      return;
-    }
+    // Read the live DOM values so browser autofill cannot submit a stale
+    // React state that no longer matches what is on screen.
+    const form = new FormData(e.currentTarget);
+    const email = String(form.get('email') ?? '').trim();
+    const password = String(form.get('password') ?? '');
 
     try {
       const { error } = await signIn(email, password);
@@ -68,7 +63,7 @@ export default function AdminLoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} className="space-y-5" autoComplete="on">
             <div>
               <label className="block text-sm font-semibold text-brand-espresso mb-2">
                 Email Address
@@ -77,8 +72,9 @@ export default function AdminLoginPage() {
                 <i className="ri-mail-line absolute left-4 top-1/2 -translate-y-1/2 text-brand-cocoa/40 text-lg"></i>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  autoComplete="username"
+                  defaultValue="greencup4me@gmail.com"
                   className="w-full pl-12 pr-4 py-3 border-2 border-brand-nude rounded-lg focus:ring-2 focus:ring-brand-champagne/50 focus:border-brand-espresso text-brand-cocoa"
                   placeholder="your@email.com"
                   required
@@ -94,8 +90,8 @@ export default function AdminLoginPage() {
                 <i className="ri-lock-line absolute left-4 top-1/2 -translate-y-1/2 text-brand-cocoa/40 text-lg"></i>
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  autoComplete="current-password"
                   className="w-full pl-12 pr-12 py-3 border-2 border-brand-nude rounded-lg focus:ring-2 focus:ring-brand-champagne/50 focus:border-brand-espresso text-brand-cocoa"
                   placeholder="Enter your password"
                   required
@@ -112,13 +108,13 @@ export default function AdminLoginPage() {
 
             <button
               type="submit"
-              disabled={isLoading || verifying}
+              disabled={isLoading}
               className="w-full bg-brand-espresso hover:bg-brand-cocoa text-brand-cream py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap shadow-sm"
             >
-              {isLoading || verifying ? (
+              {isLoading ? (
                 <span className="flex items-center justify-center space-x-2">
                   <i className="ri-loader-4-line animate-spin"></i>
-                  <span>{verifying ? 'Verifying...' : 'Signing in...'}</span>
+                  <span>Signing in...</span>
                 </span>
               ) : (
                 'Sign In'
