@@ -27,21 +27,25 @@ export default function AboutPage() {
   const values = [
     {
       title: 'FDA-Registered',
+      icon: 'ri-shield-check-line',
       description:
         'Every Green Cup blend is registered and made in Ghana by Shapes Pro Ltd — teas you can drink with confidence.',
     },
     {
       title: 'Brew Nature',
+      icon: 'ri-leaf-line',
       description:
         'Soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon: small-batch infusions with nothing added that does not belong.',
     },
     {
       title: 'Daily Ritual',
+      icon: 'ri-cup-line',
       description:
         'Caffeine-free cups for morning brightness, after-meal comfort, and evening wind-down. Hot or iced.',
     },
     {
       title: 'Delivered With Care',
+      icon: 'ri-truck-line',
       description: `Confirm a pickup at ${CONTACT_ADDRESS}, or have your order sent across Ghana. This is fulfillment, not a walk-in shop.`,
     },
   ];
@@ -178,24 +182,42 @@ export default function AboutPage() {
         )}
       </div>
 
-      <div className="bg-white py-24 border-y border-brand-nude">
+      <div className="bg-brand-cream py-24 border-y border-brand-nude">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display text-brand-espresso mb-4">Why Shop With Us?</h2>
-            <p className="brand-body-lg max-w-2xl mx-auto text-center">
+            <span className="brand-eyebrow mb-4 block">The difference</span>
+            <h2 className="text-4xl md:text-5xl font-display text-brand-espresso mb-5 tracking-tight text-balance">
+              Why Shop With Us?
+            </h2>
+            <div className="w-16 h-px bg-brand-champagne mx-auto mb-6" />
+            <p className="brand-body-lg max-w-2xl mx-auto text-center text-pretty">
               One job, done well: FDA-registered Ghanaian teas you can shop online, pick up at Spintex, or send
               across Ghana.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 gap-5 lg:gap-7">
             {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-brand-cream p-8 rounded-2xl border border-brand-nude hover:shadow-soft transition-all duration-300 hover:-translate-y-1"
+              <article
+                key={value.title}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-brand-nude/80 bg-white px-8 py-9 md:px-10 md:py-10 shadow-[0_1px_0_rgba(27,58,47,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-soft"
               >
-                <h3 className="text-xl font-display text-brand-espresso mb-3">{value.title}</h3>
-                <p className="brand-body text-base">{value.description}</p>
-              </div>
+                <div className="pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full bg-brand-espresso/[0.03] transition-transform duration-500 group-hover:scale-125" />
+                <div className="relative flex items-start justify-between gap-4 mb-7">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[#EEF2E9] text-brand-espresso">
+                    <i className={`${value.icon} text-[1.65rem] leading-none`} aria-hidden />
+                  </div>
+                  <span className="font-display text-sm tracking-[0.18em] text-brand-champagne">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <h3 className="relative font-display text-2xl md:text-[1.7rem] text-brand-espresso tracking-tight text-balance mb-4">
+                  {value.title}
+                </h3>
+                <div className="relative w-10 h-px bg-brand-champagne mb-5" />
+                <p className="relative brand-body text-base md:text-[1.05rem] leading-relaxed text-pretty">
+                  {value.description}
+                </p>
+              </article>
             ))}
           </div>
         </div>
