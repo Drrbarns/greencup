@@ -109,15 +109,25 @@ export async function authenticate(
 
     if (!valid) {
         const attempts = user.failed_login_count + 1;
-        await query(
-            `UPDATE users
-                SET failed_login_count = $2,
-                    locked_until = CASE WHEN $2 >= $3
-                                        THEN now() + ($4 || ' minutes')::interval
-                                        ELSE locked_until END
-              WHERE id = $1`,
-            [user.id, attempts, MAX_FAILED_LOGINS, String(LOCKOUT_MINUTES)]
-        );
+        // node-pg sends JS numbers as `unknown`; without casts Postgres 42P08
+        // ("inconsistent types deduced for parameter $2") turns a wrong
+        // password into a 500 instead of a normal 401.
+        try {
+            await query(
+                `UPDATE users
+                    SET failed_login_count = $2::integer,
+                        locked_until = CASE WHEN $2::integer >= $3::integer
+                                            THEN now() + ($4::text || ' minutes')::interval
+                                            ELSE locked_until END
+                  WHERE id = $1`,
+                [user.id, attempts, MAX_FAILED_LOGINS, String(LOCKOUT_MINUTES)]
+            );
+        } catch (err) {
+            console.error('[auth] failed to record login attempt', {
+                message: (err as Error).message,
+                code: (err as { code?: string }).code,
+            });
+        }
         return null;
     }
 
