@@ -14,7 +14,7 @@ export const BRAND_INTRO_SECONDARY =
   'From soursop leaf and lemon-ginger to guava, papaya-cinnamon, and beetroot, we craft small-batch infusions you can drink hot or iced. Shop online, then pick up at Spintex or have it sent across Ghana.';
 
 export const SITE_URL_DEFAULT = 'https://greencup4u.com';
-export const LOGO_PATH = '/logo.png';
+export const LOGO_PATH = '/logo.png?v=20260917';
 export const OG_IMAGE_PATH = '/og-image.png';
 
 export const CONTACT_ADDRESS = 'GCB Bank, White House, Spintex Road, Accra';
