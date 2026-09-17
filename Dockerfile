@@ -4,7 +4,13 @@ FROM node:22-alpine AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
 COPY package.json package-lock.json ./
-RUN npm ci --include=optional --no-audit --no-fund
+RUN npm config set fetch-retries 5 \
+    && npm config set fetch-retry-mintimeout 20000 \
+    && npm config set fetch-retry-maxtimeout 120000 \
+    && (npm ci --include=optional --no-audit --no-fund \
+        || (echo ">>> npm ci failed, falling back to npm install" \
+            && rm -rf node_modules package-lock.json \
+            && npm install --include=optional --no-audit --no-fund))
 
 FROM node:22-alpine AS builder
 WORKDIR /app
