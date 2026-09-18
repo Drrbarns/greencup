@@ -305,8 +305,8 @@ const LLM_TOOLS = [
                     },
                     payment_method: {
                         type: 'string',
-                        enum: ['moolre', 'cod'],
-                        description: 'moolre = Moolre Mobile Money link (recommended), cod = cash on delivery where offered',
+                        enum: ['paystack', 'moolre', 'cod'],
+                        description: 'paystack = card or Mobile Money (recommended), moolre = same Paystack checkout, cod = cash on delivery where offered',
                     },
                 },
                 required: ['items', 'shipping', 'delivery_method', 'payment_method'],
@@ -1298,7 +1298,7 @@ async function executeToolCall(
                 items: args.items || [],
                 shipping: args.shipping || {},
                 deliveryMethod: args.delivery_method || 'standard',
-                paymentMethod: args.payment_method || 'moolre',
+                paymentMethod: args.payment_method || 'paystack',
                 userId,
             });
 

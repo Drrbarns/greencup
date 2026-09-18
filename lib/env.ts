@@ -27,6 +27,7 @@ const REQUIREMENTS: Requirement[] = [
         hint: 'Absolute public URL, used in emails, SMS links and SEO metadata.',
         validate: (value) => (/^https?:\/\//.test(value) ? null : 'must start with http:// or https://'),
     },
+    { name: 'PAYSTACK_SECRET_KEY', required: false, hint: 'Website checkout is skipped when unset.' },
     { name: 'MOOLRE_SMS_API_KEY', required: false, hint: 'SMS notifications are skipped when unset.' },
     { name: 'RESEND_API_KEY', required: false, hint: 'Email notifications are skipped when unset.' },
     { name: 'UPLOAD_DIR', required: false, hint: 'Defaults to public/uploads, which is not persistent.' },

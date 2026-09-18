@@ -32,7 +32,7 @@ export const POST = route(async (request) => {
         trackingNumber,
         shippingData,
         deliveryMethod = 'pickup',
-        paymentMethod = 'moolre',
+        paymentMethod = 'paystack',
         paymentOption = 'full',
         cart,
         shippingCost = 0,
@@ -70,7 +70,7 @@ export const POST = route(async (request) => {
         couponCode: couponCode ? String(couponCode) : null,
     });
 
-    if (String(paymentMethod) !== 'moolre') {
+    if (!['paystack', 'moolre'].includes(String(paymentMethod))) {
         await sendAndMarkOrderConfirmation(order as Record<string, unknown>);
     }
 

@@ -73,7 +73,7 @@ export default function PaymentPage() {
     setError(null);
 
     try {
-      const paymentRes = await fetch('/api/payment/moolre', {
+      const paymentRes = await fetch('/api/payment/paystack', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -251,7 +251,7 @@ export default function PaymentPage() {
           ) : (
             <>
               <i className="ri-secure-payment-line mr-2"></i>
-              Pay GH₵ {chargeNow.toFixed(2)} with Mobile Money
+              Pay GH₵ {chargeNow.toFixed(2)} with card or MoMo
             </>
           )}
         </button>
@@ -259,7 +259,7 @@ export default function PaymentPage() {
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 flex items-center justify-center">
             <i className="ri-lock-line mr-1"></i>
-            Secure payment powered by Moolre
+            Secure payment powered by Paystack
           </p>
         </div>
 

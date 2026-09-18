@@ -290,6 +290,16 @@ export default function AdminLayout({
               <i className="ri-external-link-line text-xl w-5 h-5 flex items-center justify-center"></i>
               <span>View Store</span>
             </Link>
+            <a
+              href="https://admin.greencup4u.com/admin"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
+              className="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer"
+            >
+              <i className="ri-whatsapp-line text-xl w-5 h-5 flex items-center justify-center"></i>
+              <span>WhatsApp inbox</span>
+            </a>
           </div>
         </div>
       </aside>

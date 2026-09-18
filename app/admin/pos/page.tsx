@@ -318,7 +318,7 @@ export default function POSPage() {
                     trackingNumber: `SLI-POS-${Date.now()}`,
                     shippingData,
                     deliveryMethod,
-                    paymentMethod: paymentMethod === 'momo' ? 'moolre' : paymentMethod,
+                    paymentMethod: paymentMethod === 'momo' ? 'paystack' : paymentMethod,
                     cart: cart.map((item) => ({
                         id: item.id,
                         name: item.name,
@@ -367,9 +367,8 @@ export default function POSPage() {
                 }
             }
 
-            // 5. If Momo — initiate Moolre payment
             if (paymentMethod === 'momo') {
-                const paymentRes = await fetch('/api/payment/moolre', {
+                const paymentRes = await fetch('/api/payment/paystack', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -939,7 +938,7 @@ export default function POSPage() {
                                                 <i className="ri-information-line text-amber-600 mt-0.5"></i>
                                                 <div className="text-sm text-amber-800">
                                                     <p className="font-semibold">Mobile Money Payment</p>
-                                                    <p className="mt-1">A Moolre payment link will be generated. The customer can pay via their phone, or you can open the link on your device.</p>
+                                                    <p className="mt-1">A Paystack payment link will be generated. The customer can pay with card or Mobile Money, or you can open the link on your device.</p>
                                                 </div>
                                             </div>
                                         </div>

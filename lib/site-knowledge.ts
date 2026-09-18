@@ -65,8 +65,8 @@ export const SITE_KNOWLEDGE: SiteKnowledgeEntry[] = [
         title: 'Payment Methods',
         path: '/checkout',
         category: 'payment',
-        content: 'Checkout uses Moolre for secure Mobile Money (MoMo) payments in Ghana Cedis (GHS). Guest checkout is supported — no account needed.',
-        keywords: ['pay', 'payment', 'card', 'momo', 'mobile money', 'moolre', 'guest checkout', 'how to pay'],
+        content: 'Checkout uses Paystack for secure card and Mobile Money (MoMo) payments in Ghana Cedis (GHS). Guest checkout is supported — no account needed.',
+        keywords: ['pay', 'payment', 'card', 'momo', 'mobile money', 'paystack', 'moolre', 'guest checkout', 'how to pay'],
     },
     {
         id: 'shop',

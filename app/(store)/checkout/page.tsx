@@ -67,7 +67,7 @@ export default function CheckoutPage() {
   ];
 
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
-  const [paymentMethod, setPaymentMethod] = useState('moolre');
+  const [paymentMethod, setPaymentMethod] = useState('paystack');
   const [errors, setErrors] = useState<any>({});
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
 
@@ -207,11 +207,9 @@ export default function CheckoutPage() {
         }
       }
 
-      if (paymentMethod === 'moolre') {
+      if (paymentMethod === 'paystack' || paymentMethod === 'moolre') {
         try {
-          // Payment link reminder will be sent automatically after 15 mins if unpaid (via cron)
-
-          const paymentRes = await fetch('/api/payment/moolre', {
+          const paymentRes = await fetch('/api/payment/paystack', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -230,7 +228,6 @@ export default function CheckoutPage() {
           clearCart();
           clearAppliedCoupon();
 
-          // Redirect to Moolre
           window.location.href = paymentResult.url;
           return;
 
@@ -624,7 +621,7 @@ export default function CheckoutPage() {
                 <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-2 font-sans tracking-normal">Payment</h2>
                   <p className="text-sm text-gray-600 mb-6 font-sans tracking-normal [word-spacing:0.06em]">
-                    Pay the full order now with Mobile Money.
+                    Pay the full order now with card or Mobile Money.
                   </p>
                   <div className="flex items-center justify-between p-4 border-2 border-store-navy bg-store-surface rounded-lg mb-6">
                     <div>
@@ -656,7 +653,7 @@ export default function CheckoutPage() {
                           Processing...
                         </>
                       ) : (
-                        `Pay GH₵ ${total.toFixed(2)} with Mobile Money`
+                        `Pay GH₵ ${total.toFixed(2)} with card or MoMo`
                       )}
                     </button>
                   </div>
