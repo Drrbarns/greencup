@@ -276,7 +276,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               <i className="ri-arrow-right-s-line text-gray-400"></i>
               <Link href="#" className="text-gray-600 hover:text-store-primary transition-colors">{product.category}</Link>
               <i className="ri-arrow-right-s-line text-gray-400"></i>
-              <span className="text-gray-900 font-medium truncate max-w-[200px]">{product.name}</span>
+              <span className="text-gray-900 font-medium min-w-0 break-words">{product.name}</span>
             </nav>
           </div>
         </section>
