@@ -19,6 +19,14 @@ import {
   variantSizesForColor,
   variantStock,
 } from '@/lib/product-variants';
+import { productFacts } from '@/lib/product-details';
+
+const PRODUCT_TABS = [
+  { id: 'description', label: 'Description' },
+  { id: 'features', label: 'Features' },
+  { id: 'brewing', label: 'Brewing & Storage' },
+  { id: 'reviews', label: 'Reviews' },
+] as const;
 
 export default function ProductDetailClient({ slug }: { slug: string }) {
   const [product, setProduct] = useState<any>(null);
@@ -62,6 +70,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           productData.product_variants || [],
           productData.price
         );
+        const facts = productFacts({
+          slug: productData.slug || slug,
+          metadata: productData.metadata,
+        });
 
         const transformedProduct = {
           ...productData,
@@ -81,9 +93,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           colors,
           colorHexMap,
           variants,
-          features: ['Premium Quality', 'Authentic Design'],
-          featured: ['Premium Quality', 'Authentic Design'],
-          care: 'Handle with care.',
+          features: facts.features,
+          featured: facts.features,
+          care: facts.brewingAndStorage,
+          brewingAndStorage: facts.brewingAndStorage,
           preorderShipping: productData.metadata?.preorder_shipping || null
         };
 
@@ -571,16 +584,16 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="border-b border-gray-300 mb-8">
               <div className="flex space-x-4 sm:space-x-8 overflow-x-auto">
-                {['description', 'features', 'care', 'reviews'].map((tab) => (
+                {PRODUCT_TABS.map((tab) => (
                   <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`pb-4 font-semibold transition-colors relative whitespace-nowrap cursor-pointer ${activeTab === tab
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`pb-4 font-semibold transition-colors relative whitespace-nowrap cursor-pointer ${activeTab === tab.id
                       ? 'text-store-primary border-b-2 border-store-navy'
                       : 'text-gray-600 hover:text-gray-900'
                       }`}
                   >
-                    {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    {tab.label}
                   </button>
                 ))}
               </div>
@@ -606,10 +619,10 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
               </div>
             )}
 
-            {activeTab === 'care' && (
+            {activeTab === 'brewing' && (
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Care Instructions</h3>
-                <p className="text-gray-700 text-lg leading-relaxed">{product.care}</p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Brewing & Storage</h3>
+                <p className="text-gray-700 text-lg leading-relaxed">{product.brewingAndStorage}</p>
               </div>
             )}
 
