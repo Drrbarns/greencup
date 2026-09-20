@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { tasteProfileForSlug } from '@/lib/product-details';
 
 interface Product {
   id: string;
+  slug?: string;
   name: string;
   price: number;
   originalPrice?: number;
@@ -35,6 +37,7 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
   const [addedToCart, setAddedToCart] = useState(false);
 
   const images = product.images || [product.image];
+  const taste = tasteProfileForSlug(product.slug);
 
   const handleAddToCart = () => {
     setAddedToCart(true);
@@ -103,6 +106,11 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                 </div>
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h2>
+                {taste && (
+                  <p className="text-sm text-store-ink font-medium mb-3">
+                    Taste profile: {taste.profile}
+                  </p>
+                )}
 
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="flex items-center space-x-1">

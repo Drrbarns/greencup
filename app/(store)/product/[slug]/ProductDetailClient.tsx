@@ -97,6 +97,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
           featured: facts.features,
           care: facts.brewingAndStorage,
           brewingAndStorage: facts.brewingAndStorage,
+          taste: facts.taste,
           preorderShipping: productData.metadata?.preorder_shipping || null
         };
 
@@ -336,6 +337,16 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   <div>
                     <p className="text-sm text-store-primary font-semibold mb-2">{product.category}</p>
                     <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">{product.name}</h1>
+                    {product.taste && (
+                      <div className="mb-3 max-w-xl">
+                        <p className="text-base text-store-ink font-medium">
+                          Taste profile: {product.taste.profile}
+                        </p>
+                        <p className="mt-2 text-sm sm:text-base text-gray-600 leading-relaxed">
+                          {product.taste.notes}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <button
                     onClick={() => setIsWishlisted(!isWishlisted)}

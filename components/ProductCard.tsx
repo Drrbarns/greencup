@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import LazyImage from './LazyImage';
 import { useCart } from '@/context/CartContext';
+import { tasteProfileForSlug } from '@/lib/product-details';
 
 // Map common color names to hex values for swatches
 const COLOR_MAP: Record<string, string> = {
@@ -80,6 +81,7 @@ export default function ProductCard({
   const MAX_SWATCHES = 5;
 
   const formatPrice = (val: number) => `GH\u20B5${val.toFixed(2)}`;
+  const taste = tasteProfileForSlug(slug);
 
   return (
     <div className="group bg-transparent rounded-lg h-full flex flex-col hover-lift">
@@ -139,6 +141,11 @@ export default function ProductCard({
           <h3 className="font-display text-sm sm:text-lg md:text-xl leading-snug sm:leading-tight text-brand-espresso mb-1 sm:mb-1.5 group-hover:text-brand-mauve transition-colors duration-300 line-clamp-2 tracking-tight">
             {name}
           </h3>
+          {taste && (
+            <p className="text-[11px] sm:text-sm text-brand-cocoa/80 leading-snug mb-1 sm:mb-1.5 line-clamp-2">
+              {taste.profile}
+            </p>
+          )}
         </Link>
 
         {colorVariants.length > 0 && (
