@@ -585,10 +585,10 @@ export default function CheckoutPage() {
                         />
                         <div>
                           <p className="font-semibold text-gray-900">Doorstep Delivery</p>
-                          <p className="text-sm text-gray-600">We will contact you with the delivery cost</p>
+                          <p className="text-sm text-gray-600">We will contact you with the delivery charge</p>
                         </div>
                       </div>
-                      <p className="font-semibold text-amber-600 text-sm">At a Cost</p>
+                      <p className="font-semibold text-amber-700 text-sm text-right shrink-0">Delivery charge</p>
                     </label>
 
                     {/* Comprehensive delivery options - to be re-enabled later

@@ -42,7 +42,7 @@ export function formatDeliveryMethod(method: string): string {
 
 export function deliveryMethodHint(method: string): string {
   if (isStorePickup(method)) return 'Pick up from our store — ready in 24 hours';
-  if (method === 'doorstep') return 'We will contact you with the delivery cost';
+  if (method === 'doorstep') return 'We will contact you with the delivery charge';
   return '';
 }
 
