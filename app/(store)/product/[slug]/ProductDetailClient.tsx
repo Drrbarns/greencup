@@ -22,7 +22,6 @@ import {
 import { productFacts } from '@/lib/product-details';
 
 const PRODUCT_TABS = [
-  { id: 'description', label: 'Description' },
   { id: 'features', label: 'Features' },
   { id: 'brewing', label: 'Brewing & Storage' },
   { id: 'reviews', label: 'Reviews' },
@@ -36,7 +35,7 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState('features');
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState<any[]>([]);
 
@@ -381,8 +380,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                   )}
                 </div>
 
-                <p className="text-gray-700 leading-relaxed mb-8 text-lg">{product.description}</p>
-
                 {/* Color selector */}
                 {hasVariants && hasColors && (
                   <div className="mb-6">
@@ -609,12 +606,6 @@ export default function ProductDetailClient({ slug }: { slug: string }) {
                 ))}
               </div>
             </div>
-
-            {activeTab === 'description' && (
-              <div className="prose max-w-none">
-                <p className="text-gray-700 text-lg leading-relaxed">{product.description}</p>
-              </div>
-            )}
 
             {activeTab === 'features' && (
               <div>

@@ -107,9 +107,16 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
 
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">{product.name}</h2>
                 {taste && (
-                  <p className="text-sm text-store-ink font-medium mb-3">
-                    Taste profile: {taste.profile}
-                  </p>
+                  <div className="mb-3">
+                    <p className="text-sm text-store-ink font-medium">
+                      Taste profile: {taste.profile}
+                    </p>
+                    {taste.notes && (
+                      <p className="mt-1 text-sm text-gray-600 leading-relaxed line-clamp-3">
+                        {taste.notes}
+                      </p>
+                    )}
+                  </div>
                 )}
 
                 <div className="flex items-center space-x-3 mb-4">
@@ -139,8 +146,6 @@ export default function QuickViewModal({ product, isOpen, onClose }: QuickViewMo
                     </>
                   )}
                 </div>
-
-                <p className="text-gray-600 mb-6 line-clamp-3">{product.description}</p>
 
                 {product.colors && product.colors.length > 0 && (
                   <div className="mb-6">
