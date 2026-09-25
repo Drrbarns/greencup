@@ -18,10 +18,10 @@ export const LOGO_PATH = '/logo.png?v=20260917';
 export const OG_IMAGE_PATH = '/og-image.png';
 
 export const CONTACT_ADDRESS = 'GCB Bank, White House, Spintex Road, Accra';
-export const CONTACT_PHONE = '0555555787';
-export const CONTACT_PHONE_DISPLAY = '055 555 5787';
-export const CONTACT_WHATSAPP = '0555555787';
-export const WHATSAPP_LINK = 'https://wa.me/233555555787';
+export const CONTACT_PHONE = '0555556787';
+export const CONTACT_PHONE_DISPLAY = '055 555 6787';
+export const CONTACT_WHATSAPP = '0555556787';
+export const WHATSAPP_LINK = 'https://wa.me/233555556787';
 export const WHATSAPP_SHOP_NOTE =
   'This is a fulfillment location, not a walk-in shop — confirm a pickup time so the package is ready.';
 

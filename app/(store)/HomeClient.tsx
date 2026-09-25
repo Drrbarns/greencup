@@ -10,7 +10,7 @@ import HorizontalScroll from '@/components/HorizontalScroll';
 import NewsletterSection from '@/components/NewsletterSection';
 import WhoWeAreSection from '@/components/WhoWeAreSection';
 import { usePageTitle } from '@/hooks/usePageTitle';
-import { HERO_IMAGES, HERO_IMAGE_VERSION } from '@/lib/brand';
+import { HERO_IMAGES, HERO_IMAGE_VERSION, WHATSAPP_LINK } from '@/lib/brand';
 import { storeImageSrc } from '@/lib/store-image';
 
 const CATEGORY_TINTS = [
@@ -75,7 +75,7 @@ const HERO_SLIDES = [
     ),
     subtext: 'FDA-registered teas from Shapes Pro Ltd. Soursop, lemon-ginger, guava, and more — made in Ghana.',
     cta: { text: 'Shop the Range', href: '/shop' },
-    cta2: { text: 'Chat on WhatsApp', href: 'https://wa.me/233555555787' },
+    cta2: { text: 'Chat on WhatsApp', href: WHATSAPP_LINK },
   },
   {
     tag: 'Feel Better',

@@ -9,7 +9,6 @@ import {
   CONTACT_ADDRESS,
   CONTACT_PHONE_DISPLAY,
   WHATSAPP_LINK,
-  INSTAGRAM_HANDLE,
   INSTAGRAM_URL,
 } from '@/lib/brand';
 import { useCMS } from '@/context/CMSContext';
@@ -143,25 +142,33 @@ export default function Footer() {
           </div>
         </nav>
 
-        {/* Contact — single compact row */}
-        <div className="mt-6 pt-5 border-t border-brand-nude/50 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 sm:gap-y-1 text-xs text-brand-cocoa/70">
+        {/* Contact — address plus icon buttons (WhatsApp is the live shop line) */}
+        <div className="mt-6 pt-5 border-t border-brand-nude/50 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between text-xs text-brand-cocoa/70">
           <span className="inline-flex items-center gap-1.5 min-w-0">
             <i className="ri-map-pin-line text-brand-espresso shrink-0" />
             <span className="truncate">{contactAddress}</span>
           </span>
-          <a href={phoneHref} className="inline-flex items-center gap-1.5 hover:text-brand-espresso transition-colors">
-            <i className="ri-phone-line text-brand-espresso shrink-0" />
-            {contactPhone}
-          </a>
-          <a
-            href={socialInstagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 hover:text-brand-espresso transition-colors"
-          >
-            <i className="ri-instagram-line text-brand-espresso shrink-0" />
-            {INSTAGRAM_HANDLE}
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-nude/80 bg-white px-3 py-1.5 text-xs font-semibold text-brand-espresso hover:bg-brand-espresso hover:text-brand-cream transition-colors"
+              aria-label="Chat on WhatsApp"
+            >
+              <i className="ri-whatsapp-line text-base" />
+              WhatsApp
+            </a>
+            <a
+              href={socialInstagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-brand-nude/80 bg-white text-brand-espresso hover:bg-brand-espresso hover:text-brand-cream transition-colors"
+              aria-label="Instagram"
+            >
+              <i className="ri-instagram-line text-base" />
+            </a>
+          </div>
         </div>
 
         {/* Copyright */}

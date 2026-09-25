@@ -58,8 +58,8 @@ export function buildContactCards({
     {
       icon: 'ri-whatsapp-line',
       title: 'WhatsApp',
-      detail: displayPhone(wa),
-      subtext: 'Chat with us instantly',
+      detail: 'Message Green Cup',
+      subtext: 'Opens a chat — tap the button',
       href: `https://wa.me/${waDigits}`,
       external: true,
     },
