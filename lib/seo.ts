@@ -61,12 +61,12 @@ export const SEO_ASSETS = {
   twitterCard: '/twitter-card.png',
   logo: '/logo.png',
   faviconDir: '/favicon',
-  faviconIco: '/favicon/favicon.ico',
-  favicon16: '/favicon/favicon-16x16.png',
-  favicon32: '/favicon/favicon-32x32.png',
-  appleTouchIcon: '/favicon/apple-touch-icon.png',
-  icon192: '/favicon/android-chrome-192x192.png',
-  icon512: '/favicon/android-chrome-512x512.png',
+  faviconIco: '/favicon/favicon.ico?v=20260925',
+  favicon16: '/favicon/favicon-16x16.png?v=20260925',
+  favicon32: '/favicon/favicon-32x32.png?v=20260925',
+  appleTouchIcon: '/favicon/apple-touch-icon.png?v=20260925',
+  icon192: '/favicon/android-chrome-192x192.png?v=20260925',
+  icon512: '/favicon/android-chrome-512x512.png?v=20260925',
 } as const;
 
 export const DEFAULT_TITLE = 'Green Cup | FDA-Registered Ghanaian Teas';
@@ -332,7 +332,7 @@ export function buildRootMetadata(): Metadata {
     appleWebApp: {
       capable: true,
       statusBarStyle: 'default',
-      title: 'Upscale',
+      title: BRAND_NAME,
     },
     verification: googleVerification ? { google: googleVerification } : undefined,
     openGraph: {

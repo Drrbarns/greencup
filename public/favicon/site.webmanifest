@@ -1,19 +1,19 @@
 {
-  "name": "Upscale Vintage",
-  "short_name": "Upscale",
+  "name": "Green Cup",
+  "short_name": "Green Cup",
   "icons": [
     {
-      "src": "/favicon/android-chrome-192x192.png",
+      "src": "/favicon/android-chrome-192x192.png?v=20260925",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicon/android-chrome-512x512.png",
+      "src": "/favicon/android-chrome-512x512.png?v=20260925",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "theme_color": "#6B3E2E",
-  "background_color": "#FAF6F2",
+  "theme_color": "#1B3A2F",
+  "background_color": "#FFFFFF",
   "display": "standalone"
 }

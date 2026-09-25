@@ -131,7 +131,7 @@ async function main() {
 
   const webmanifest = {
     name: BRAND.name,
-    short_name: 'Upscale',
+    short_name: 'Green Cup',
     icons: [
       { src: '/favicon/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
       { src: '/favicon/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },

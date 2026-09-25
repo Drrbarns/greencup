@@ -1,31 +1,31 @@
 {
   "name": "Green Cup",
-  "short_name": "Upscale",
-  "description": "Shop curated fashion, bags, accessories, and imported lifestyle finds in Ghana.",
+  "short_name": "Green Cup",
+  "description": "FDA-registered Ghanaian teas and botanical infusions. Brew nature. Feel better.",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#FAF6F2",
-  "theme_color": "#6B3E2E",
+  "background_color": "#FFFFFF",
+  "theme_color": "#1B3A2F",
   "dir": "ltr",
   "lang": "en",
-  "categories": ["shopping", "lifestyle", "fashion"],
+  "categories": ["shopping", "food", "lifestyle"],
   "icons": [
     {
-      "src": "/favicon/android-chrome-192x192.png",
+      "src": "/favicon/android-chrome-192x192.png?v=20260925",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon/android-chrome-512x512.png",
+      "src": "/favicon/android-chrome-512x512.png?v=20260925",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/favicon/android-chrome-512x512.png",
+      "src": "/favicon/android-chrome-512x512.png?v=20260925",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
