@@ -179,7 +179,7 @@ function ShopContent() {
     <main className="min-h-screen bg-white">
       <PageHero
         title="Shop All Products"
-        subtitle="Shop graphic, plain, polo, and performance t-shirts for men and women."
+        subtitle="FDA-registered Ghanaian teas and botanical infusions — soursop, lemon-ginger, guava, and more."
         backgroundImage="/hero/lifestyle-hero-1.png"
       />
 

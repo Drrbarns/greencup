@@ -428,7 +428,7 @@ export async function sendWelcomeMessage(user: { email: string, firstName: strin
   <p style="margin:0;color:#6b7280;font-size:15px;">We're so glad you're here.</p>
 </div>
 
-<p style="color:#374151;font-size:14px;line-height:1.7;margin:16px 0;">Thank you for joining the ${BRAND.name} family. Your trending lifestyle destination and import plug for fashion, home appliances, and curated arrivals across Ghana.</p>
+<p style="color:#374151;font-size:14px;line-height:1.7;margin:16px 0;">Thank you for joining the ${BRAND.name} family. We brew FDA-registered Ghanaian teas and botanical infusions for everyday wellbeing — shop online, pick up at Spintex, or send a pack across Ghana.</p>
 
 <div style="background-color:#f9fafb;border-radius:12px;padding:20px;margin:20px 0;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">

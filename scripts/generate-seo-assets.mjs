@@ -15,8 +15,8 @@ const appDir = path.join(root, 'app');
 
 const BRAND = {
   name: 'Green Cup',
-  tagline: 'Fashion · Lifestyle · Imported Finds',
-  sub: 'Curated for modern everyday glam · Accra, Ghana',
+  tagline: 'A Daily Source Of Well-being',
+  sub: 'FDA-registered Ghanaian teas · Accra, Ghana',
   cream: '#FAF6F2',
   espresso: '#6B3E2E',
   mauve: '#C58A94',

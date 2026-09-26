@@ -31,7 +31,7 @@ export default function ReturnConfirmationPage() {
             <ol className="brand-body text-sm space-y-3 list-decimal list-inside">
               <li>We confirm your request matches our refund or exchange policy.</li>
               <li>You receive instructions by WhatsApp or email.</li>
-              <li>Items must be unworn, with tags and original packaging.</li>
+              <li>Packs must be unopened and in the original packaging.</li>
               <li>Exchanges must stay within 24 hours of purchase.</li>
             </ol>
           </div>

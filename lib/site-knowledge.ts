@@ -34,7 +34,7 @@ export const SITE_KNOWLEDGE: SiteKnowledgeEntry[] = [
         path: '/about',
         category: 'company',
         content: `${BRAND_NAME} — ${TAGLINE} Based in Accra, Ghana with delivery nationwide. The exact list of categories we carry is fetched live from the database and provided to the assistant in the OUR CATEGORIES section.`,
-        keywords: ['about', 'who', 'brand', 'mission', 'company', 'upscale', 'vintage', 'store'],
+        keywords: ['about', 'who', 'brand', 'mission', 'company', 'tea', 'green cup', 'store'],
     },
     {
         id: 'contact',
@@ -57,7 +57,7 @@ export const SITE_KNOWLEDGE: SiteKnowledgeEntry[] = [
         title: 'Returns & Exchanges',
         path: '/returns',
         category: 'returns',
-        content: 'A refund may be approved when there was a defective or damaged item, a mix up in your order, payment for a sold-out item, or a package misplaced in store. Exchanges must be completed within 24 hours of purchase. All items must be received unworn, undamaged, free from blemish, and in original packaging with tags still attached.',
+        content: 'A refund may be approved when there was a defective or damaged item, a mix up in your order, payment for a sold-out item, or a package misplaced in store. Exchanges must be completed within 24 hours of purchase. Packs must arrive unopened, undamaged, and in the original packaging.',
         keywords: ['return', 'refund', 'exchange', 'wrong item', 'damaged', 'policy'],
     },
     {

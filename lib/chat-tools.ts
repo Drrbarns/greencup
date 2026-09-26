@@ -556,10 +556,10 @@ export async function getRecommendations(_supabase: unknown, context?: string): 
 
 const STORE_INFO: Record<string, string> = {
     shipping: `We deliver across Ghana. Fees and timing are confirmed at checkout based on your region. Visit /shipping for the full policy.`,
-    returns: `Refunds may be approved for defective or damaged items, order mix-ups, items already sold out, or packages misplaced in store. Exchanges must be completed within 24 hours of purchase, and items must arrive unworn, undamaged and in original packaging with tags. See /returns for the full policy.`,
-    payment: `We accept secure Mobile Money checkout via Moolre (GHS). Guest checkout is supported.`,
+    returns: `Refunds may be approved for defective or damaged items, order mix-ups, items already sold out, or packages misplaced in store. Exchanges must be completed within 24 hours of purchase, and packs must arrive unopened, undamaged, and in the original packaging. See /returns for the full policy.`,
+    payment: `We accept secure Mobile Money checkout via Paystack (GHS). Guest checkout is supported.`,
     contact: `Reach ${BRAND_NAME}:\n- Email: ${SUPPORT_EMAIL}\n- Phone: ${CONTACT_PHONE_DISPLAY} (+233${CONTACT_PHONE.replace(/^0/, '')})\n- WhatsApp: ${WHATSAPP_LINK}`,
-    about: `${BRAND_NAME} — ${TAGLINE} We offer fashion, bags, accessories, lifestyle finds, beauty picks, home appliances and special imports.`,
+    about: `${BRAND_NAME} — ${TAGLINE} We sell FDA-registered Ghanaian teas and botanical infusions from Shapes Pro Ltd: soursop, lemon-ginger, guava, papaya-cinnamon, beetroot, and dried lemon slices.`,
     delivery_times: `Standard delivery is typically 1-3 business days in Accra and 3-7 days outside Accra. Final estimates are shown at checkout.`,
     hours: `Shop online anytime. For fastest help, use this chat or WhatsApp ${WHATSAPP_LINK}.`,
 };

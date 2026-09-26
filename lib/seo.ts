@@ -151,14 +151,14 @@ const PAGE_SEO: Record<
   },
   wishlist: {
     title: 'Wishlist',
-    description: 'Save your favorite fashion and lifestyle finds from Green Cup.',
+    description: 'Save your favourite Green Cup teas and botanical infusions.',
     path: '/wishlist',
     noindex: true,
   },
   faqs: {
     title: 'FAQs | Orders, Delivery & Payments',
     description:
-      'Answers about ordering, delivery in Ghana, Mobile Money payments, returns, and shopping imported fashion at Green Cup.',
+      'Answers about ordering, delivery in Ghana, Mobile Money payments, returns, and shopping FDA-registered teas at Green Cup.',
     path: '/faqs',
   },
   help: {
@@ -191,8 +191,8 @@ const PAGE_SEO: Record<
     path: '/terms',
   },
   blog: {
-    title: 'Style Journal & Updates',
-    description: 'Fashion tips, lifestyle inspiration, and news from Green Cup.',
+    title: 'Journal & Brewing Notes',
+    description: 'Brewing tips, blend notes, and FDA-registered tea stories from Green Cup.',
     path: '/blog',
   },
   orderTracking: {
@@ -416,7 +416,7 @@ export function websiteJsonLd() {
 export function localBusinessJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'ClothingStore',
+    '@type': 'Store',
     '@id': `${SITE_URL}/#store`,
     name: APP_TITLE,
     image: absoluteImage(SEO_ASSETS.ogImage),

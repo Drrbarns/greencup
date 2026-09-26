@@ -21,12 +21,12 @@ export default async function CategoriesPage() {
   }
 
   const palette = [
-    { color: 'from-store-navy-light to-store-navy', icon: 'ri-store-2-line' },
-    { color: 'from-store-navy-light to-store-navy', icon: 'ri-shopping-bag-3-line' },
-    { color: 'from-store-muted to-store-navy', icon: 'ri-t-shirt-line' },
-    { color: 'from-store-primary to-store-navy-light', icon: 'ri-home-smile-line' },
-    { color: 'from-store-muted to-store-navy', icon: 'ri-heart-line' },
-    { color: 'from-store-primary to-store-navy', icon: 'ri-star-smile-line' },
+    { color: 'from-store-navy-light to-store-navy', icon: 'ri-cup-line' },
+    { color: 'from-store-navy-light to-store-navy', icon: 'ri-leaf-line' },
+    { color: 'from-store-muted to-store-navy', icon: 'ri-flask-line' },
+    { color: 'from-store-primary to-store-navy-light', icon: 'ri-heart-pulse-line' },
+    { color: 'from-store-muted to-store-navy', icon: 'ri-sun-line' },
+    { color: 'from-store-primary to-store-navy', icon: 'ri-drop-line' },
   ];
 
   const categories = categoriesData?.map((c, i) => {
@@ -44,7 +44,7 @@ export default async function CategoriesPage() {
     <div className="min-h-screen bg-white">
       <PageHero
         title="Shop by Category"
-        subtitle="Graphic tees, plain basics, polos & performance shirts — shop by category."
+        subtitle="Browse Green Cup blends by type — leaf teas, infusions, and dried botanicals."
         backgroundImage="/hero/lifestyle-hero-2.png"
       />
 
@@ -76,7 +76,7 @@ export default async function CategoriesPage() {
                     </div>
                   </div>
                   <p className="text-gray-600 leading-relaxed text-sm mb-4 line-clamp-2">
-                    {category.description || 'Explore our exclusive collection in this category.'}
+                    {category.description || 'Explore FDA-registered Green Cup blends in this category.'}
                   </p>
                   <div className="flex items-center text-store-ink font-medium text-sm group-hover:gap-2 transition-all">
                     <span>Browse Collection</span>

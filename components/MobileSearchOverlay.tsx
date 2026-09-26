@@ -11,25 +11,25 @@ interface MobileSearchOverlayProps {
 export default function MobileSearchOverlay({ isOpen, onClose }: MobileSearchOverlayProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [recentSearches, setRecentSearches] = useState([
-    'Import picks',
-    'Home appliances',
-    'Leather bag',
-    'New arrivals',
+    'Soursop brew',
+    'Lemon ginger',
+    'Guava tea',
+    'Beetroot ginger',
   ]);
 
   const popularSearches = [
-    'New Arrivals',
-    'Trending imports',
-    'Fashion picks',
-    'Home appliances',
-    'Bags & accessories',
-    'Lifestyle finds',
+    'Soursop',
+    'Lemon ginger',
+    'Guava Green Brew',
+    'Papaya cinnamon',
+    'Beetroot ginger',
+    'Lemon slices',
   ];
 
   const searchSuggestions = [
-    { name: 'Trending Crossbody Bag', category: 'Bags & Accessories', price: 'GH₵289', image: 'https://readdy.ai/api/search-image?query=luxury%20crossbody%20bag%20on%20white%20surface%20clean%20minimalist%20white%20studio%20background%20professional%20product%20photography%20high%20quality%20detailed%20premium%20fashion&width=80&height=80&seq=mob1&orientation=squarish' },
-    { name: 'Classic Leather Handbag', category: 'Bags', price: 'GH₵459', image: 'https://readdy.ai/api/search-image?query=luxury%20brown%20leather%20handbag%20on%20white%20surface%20clean%20minimalist%20white%20studio%20background%20professional%20product%20photography%20high%20quality%20detailed%20premium%20fashion&width=80&height=80&seq=mob2&orientation=squarish' },
-    { name: 'Designer Sunglasses', category: 'Accessories', price: 'GH₵199', image: 'https://readdy.ai/api/search-image?query=stylish%20modern%20sunglasses%20on%20white%20display%20stand%20clean%20white%20studio%20background%20professional%20product%20photography%20high%20quality%20detailed%20fashion%20accessory&width=80&height=80&seq=mob3&orientation=squarish' }
+    { name: 'Guava Green Brew', category: 'Leaf teas', price: 'GH₵65', image: '/products/guava-green-brew-v4.jpg' },
+    { name: 'Soursop Brew', category: 'Leaf teas', price: 'GH₵65', image: '/products/soursop-brew-v4.jpg' },
+    { name: 'Natural Lemon Ginger', category: 'Infusions', price: 'GH₵55', image: '/products/natural-lemon-ginger-v4.jpg' }
   ];
 
   useEffect(() => {

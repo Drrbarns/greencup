@@ -15,18 +15,16 @@ const mockOrders = [
     items: [
       {
         id: 1,
-        name: 'Premium Leather Crossbody Bag',
-        price: 289,
-        image:
-          'https://readdy.ai/api/search-image?query=elegant%20premium%20leather%20crossbody%20bag&width=400&height=400&seq=return1&orientation=squarish',
+        name: 'Guava Green Brew',
+        price: 65,
+        image: '/products/guava-green-brew-v4.jpg',
         returnable: true,
       },
       {
         id: 2,
-        name: 'Minimalist Ceramic Vase Set',
-        price: 159,
-        image:
-          'https://readdy.ai/api/search-image?query=modern%20minimalist%20ceramic%20vase%20set&width=400&height=400&seq=return2&orientation=squarish',
+        name: 'Soursop Brew',
+        price: 65,
+        image: '/products/soursop-brew-v4.jpg',
         returnable: true,
       },
     ],
@@ -308,7 +306,7 @@ export default function ReturnsPage() {
                     matches the refund policy.
                   </li>
                   <li>
-                    <span className="font-semibold text-brand-espresso">2.</span> Pack items unworn, with tags and
+                    <span className="font-semibold text-brand-espresso">2.</span> Pack unopened tea packs in the
                     original packaging.
                   </li>
                   <li>
