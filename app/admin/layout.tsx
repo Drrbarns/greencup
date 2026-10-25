@@ -140,6 +140,11 @@ export default function AdminLayout({
       badge: ''
     },
     {
+      title: 'Buy SMS',
+      icon: 'ri-message-2-line',
+      path: '/admin/sms-credit'
+    },
+    {
       title: 'Payments',
       icon: 'ri-refund-2-line',
       path: '/admin/payments/reconcile',

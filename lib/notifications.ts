@@ -139,7 +139,7 @@ const TAYSEND_FAILED_STATUSES = new Set(["failed", "rejected", "undelivered", "e
 
 async function sendViaTaysend(to: string, message: string, senderFallback?: string) {
     const apiKey = process.env.TAYSEND_API_KEY?.trim();
-    const from = (process.env.TAYSEND_SENDER_ID || senderFallback || process.env.MOOLRE_SMS_SENDER_ID || "").trim();
+    const from = (process.env.TAYSEND_SENDER_ID || senderFallback || process.env.MOOLRE_SMS_SENDER_ID || "Green Cup").trim();
     if (!apiKey || !from) return null;
     try {
         const response = await fetch(`${TAYSEND_SMS_URL}/v1/messages`, {
@@ -192,7 +192,7 @@ export async function sendSMS({
             },
             body: JSON.stringify({
                 type: 1,
-                senderid: process.env.MOOLRE_SMS_SENDER_ID || 'UPSCALEV',
+                senderid: process.env.MOOLRE_SMS_SENDER_ID || process.env.TAYSEND_SENDER_ID || 'Green Cup',
                 messages: [
                     {
                         recipient: recipient,
