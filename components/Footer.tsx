@@ -173,7 +173,10 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between text-[11px] text-brand-cocoa/55">
-          <p>&copy; {new Date().getFullYear()} {siteName}</p>
+          <p>
+            &copy; {new Date().getFullYear()} {siteName}
+            {' '}&middot;{' '}Powered by <a href="https://doctorbarns.com" target="_blank" rel="noopener" className="text-brand-cocoa/55 hover:underline">Doctor Barns Tech</a>
+          </p>
           <p className="font-display font-medium italic text-brand-espresso/80 text-sm">A daily source of wellbeing.</p>
         </div>
       </div>
